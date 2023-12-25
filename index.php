@@ -4,7 +4,7 @@ include_once '_config/config.php';
 include_once '_functions/functions.php';
 include_once '_config/db.php';
 
-dd($_SERVER['PHP_SELF']);
+//dd($_SERVER['PHP_SELF']);
 
 spl_autoload_register(function ($class) {
     include_once '_classes/' . $class . '.php';
@@ -25,3 +25,4 @@ if (in_array($page . '_controller.php', $all_pages)) {
 } else {
     header('Location: 404.html');
 }
+ 
