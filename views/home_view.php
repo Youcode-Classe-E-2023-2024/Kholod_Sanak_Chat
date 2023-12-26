@@ -16,6 +16,13 @@
         </div>
         <!-- Chat messages -->
         <div class="px-6 py-4 flex-1 overflow-y-scroll ">
+            <!--Profil -->
+            <!-- Modal -->
+            <div id="profileModal" style="display: none;">
+                <div id="profileContent"></div>
+                <!--<button onclick="closeModal()">Close</button>-->
+            </div>
+
             <!-- A message -->
             <div class="border-b border-gray-600 py-3 flex items-start mb-4 text-sm">
                 <img src="https://cdn.discordapp.com/embed/avatars/0.png" class="cursor-pointer w-10 h-10 rounded-3xl mr-3">
@@ -103,7 +110,7 @@
     <!-- side bar start -->
     <div class="bg-gray-900 text-purple-lighter flex-none w-24 p-6 hidden md:block">
         <!-- Profil -->
-        <div class="cursor-pointer mb-4 border-b border-gray-600 pb-2">
+        <div class="cursor-pointer mb-4 border-b border-gray-600 pb-2"  id="profileClick">
             <div
                     class="bg-white h-12 w-12 flex items-center justify-center text-black text-2xl font-semibold rounded-xl mb-1 overflow-hidden">
                 <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="">
@@ -137,11 +144,10 @@
     <!-- Sidebar End-->
 </div>
 
-<div id="contentContainer"></div>
-
+<!-- display add room form -->
 <div class="px-6 py-4 flex-1 overflow-y-scroll" id="chatContent">
-    <!-- Existing chat messages will be loaded here -->
 </div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -189,4 +195,26 @@
         });
     });
 </script>
+
+<!-- profil -->
+<script>
+    document.getElementById('profileClick').addEventListener('click', function() {
+        // Use AJAX to load content from profile_view.php
+        $.ajax({
+            url: 'views/profile_view.php',
+            type: 'GET',
+            success: function(data) {
+                // Display the content in the modal
+                $('#profileContent').html(data);
+                $('#profileModal').show();
+            },
+            error: function() {
+                alert('Error loading profile_view.php');
+            }
+        });
+    });
+
+
+</script>
+
 

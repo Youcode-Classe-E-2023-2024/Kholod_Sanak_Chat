@@ -1,81 +1,74 @@
 <?php
 ?>
-<section class="pt-16 bg-gray-700">
-    <div class="w-full lg:w-4/12 px-4 mx-auto">
-        <div class="relative flex flex-col min-w-0 break-words bg-gray-300 w-full mb-6 shadow-xl rounded-lg mt-16">
-            <div class="px-6">
-                <div class="flex flex-wrap justify-center">
-                    <div class="w-full px-4 flex justify-center">
-                        <div class="relative">
-                            <img alt="..." src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg" class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
-                        </div>
-                    </div>
-                    <div class="w-full px-4 text-center mt-20">
-                        <div class="flex justify-center py-4 lg:pt-4 pt-8">
-                            <div class="mr-4 p-3 text-center">
-              <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                22
-              </span>
-                                <span class="text-sm text-blueGray-400">Friends</span>
-                            </div>
-                            <div class="mr-4 p-3 text-center">
-              <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                10
-              </span>
-                                <span class="text-sm text-blueGray-400">Photos</span>
-                            </div>
-                            <div class="lg:mr-4 p-3 text-center">
-              <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                89
-              </span>
-                                <span class="text-sm text-blueGray-400">Comments</span>
-                            </div>
-                        </div>
-                    </div>
+<div class=" profile min-h-screen flex flex-col max-w-md mx-auto bg-gray-400 opacity-100 font-poppins px-4 bg-no-repeat bg-cover bg-center">
+    <div class="flex justify-between px-1 pt-4 items-center">
+        <!-- Cancel button -->
+        <div id="cancelButton" >
+            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </div>
+        <div>
+            <p class="font-semibold">My Profile</p>
+        </div>
+        <div>
+            <!--Delete -->
+            <button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="delete" fill="currentColor" aria-hidden="true" class="h-4 w-4">
+                <path d="M24.2,12.193,23.8,24.3a3.988,3.988,0,0,1-4,3.857H12.2a3.988,3.988,0,0,1-4-3.853L7.8,12.193a1,1,0,0,1,2-.066l.4,12.11a2,2,0,0,0,2,1.923h7.6a2,2,0,0,0,2-1.927l.4-12.106a1,1,0,0,1,2,.066Zm1.323-4.029a1,1,0,0,1-1,1H7.478a1,1,0,0,1,0-2h3.1a1.276,1.276,0,0,0,1.273-1.148,2.991,2.991,0,0,1,2.984-2.694h2.33a2.991,2.991,0,0,1,2.984,2.694,1.276,1.276,0,0,0,1.273,1.148h3.1A1,1,0,0,1,25.522,8.164Zm-11.936-1h4.828a3.3,3.3,0,0,1-.255-.944,1,1,0,0,0-.994-.9h-2.33a1,1,0,0,0-.994.9A3.3,3.3,0,0,1,13.586,7.164Zm1.007,15.151V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Zm4.814,0V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Z"></path></svg>
+            </button>
+        </div>
+    </div>
+    <div class="flex items-center px-4 pt-12 justify-between">
+        <div class="w-24 h-24 bg-blue-600 flex items-center rounded-full">
+            <img class="h-20 w-20 mx-auto" src="https://lnmlpexiwaspywjbwwvd.supabase.in/storage/v1/object/sign/assets/boy.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhc3NldHMvYm95LnBuZyIsImlhdCI6MTYzMzUzMzk2NywiZXhwIjoxOTQ4ODkzOTY3fQ.HL6DqbdJMCZI6dqEN-ZQAu5EwtblW7r8YNuud4_kHV8">
+        </div>
+        <div class="w-9/12 flex items-center">
+            <div class="w-10/12 flex flex-col leading-none pl-4">
+                <p class="text-2xl font-bold">username</p>
+                <!--<p class="text-sm pt-1 font-light text-gray-700">Network Engineer</p>-->
+            </div>
+            <!-- Modify -->
+            <div class="w-2/12">
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-700" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.243 19H21v2H3v-4.243l9.9-9.9 4.242 4.244L9.242 19zm5.07-13.556l2.122-2.122a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414l-2.122 2.121-4.242-4.242z"/></svg>
+
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- My rooms-->
+    <div class="pt-12 px-4 w-full flex flex-col">
+        <p class="font-semibold text-gray-600">My Rooms</p>
+        <div class="flex w-full pt-2 space-x-2">
+            <!-- Room display -->
+            <button class="bg-gray-800 w-32 rounded-full px-4 py-2 font-ligth text-white flex">Room1</button>
+
+        </div>
+    </div>
+    <div class="pt-12 px-4 w-full flex flex-col">
+        <p class="font-semibold text-gray-600">Invitations</p>
+        <div class="flex flex-col w-full pt-2 space-y-2">
+            <div class="flex w-full h-12">
+
+                <div class="w-6/12 h-full flex items-start">
+                    <p class="my-auto text-lg font-semibold">Invitation 1</p>
                 </div>
-                <div class="text-center mt-12">
-                    <h3 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                        Jenna Stones
-                    </h3>
-                    <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                        <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                        Los Angeles, California
-                    </div>
-                    <div class="mb-2 text-blueGray-600 mt-10">
-                        <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                        Solution Manager - Creative Tim Officer
-                    </div>
-                    <div class="mb-2 text-blueGray-600">
-                        <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                        University of Computer Science
-                    </div>
-                </div>
-                <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
-                    <div class="flex flex-wrap justify-center">
-                        <div class="w-full lg:w-9/12 px-4">
-                            <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
-                                An artist of considerable range, Jenna the name taken
-                                by Melbourne-raised, Brooklyn-based Nick Murphy
-                                writes, performs and records all of his own music,
-                                giving it a warm, intimate feel with a solid groove
-                                structure. An artist of considerable range.
-                            </p>
-                            <a href="javascript:void(0);" class="font-normal text-pink-500">
-                                Show more
-                            </a>
-                        </div>
-                    </div>
+                <div class="w-4/12 h-full flex justify-between items-end">
+                    <button class="flex bg-green-600 rounded-md my-auto px-5 py-1 float-right text-white font-medium">Accept</button>
+                    <button class="flex bg-red-600 rounded-md my-auto px-5 py-1 float-right text-white font-medium">Refuse</button>
                 </div>
             </div>
         </div>
     </div>
-    <footer class="relative  pt-8 pb-6 mt-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap items-center md:justify-between justify-center">
-                <div class="w-full md:w-6/12 px-4 mx-auto text-center">
+</div>
+<script>
+    $(document).ready(function () {
+        // Handler for the "Cancel" button click
+        $("#cancelButton").click(function () {
+            $(".profile").hide();
+        });
+    });
+</script>
 
-                </div>
-            </div>
-        </div>
-    </footer>
-</section>
+
