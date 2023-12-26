@@ -1,13 +1,15 @@
 <?php
+//$db = mysqli_connect('localhost', 'root', '', 'chat');
+//include_once '../_classes/User.php';
+//
+//session_start();
+//
+//
 
 
-//$user = new User(1);
-//$user->username = 'Baz';
-//$user->email = 'Baz';
-//$var = $user->email;
-//$user->setPassword('123');
-//$user->edit();
-//dd($user);
 
-$users = User::getAll();
-//dd($users);
+
+
+
+//$users = User::getAll($db);
+//print_r($users);
