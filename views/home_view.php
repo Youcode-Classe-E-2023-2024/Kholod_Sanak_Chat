@@ -1,4 +1,6 @@
+<?php
 
+?>
 
 <div class="font-sans antialiased h-screen flex">
 
@@ -80,42 +82,31 @@
     <!-- Bar end-->
     <!-- side bar start -->
     <div class="bg-gray-900 text-purple-lighter flex-none w-24 p-6 hidden md:block">
+        <!-- Profil -->
         <div class="cursor-pointer mb-4 border-b border-gray-600 pb-2">
-            <div
-                    class="bg-white h-12 w-12 flex items-center justify-center text-black text-2xl font-semibold rounded-3xl mb-1 overflow-hidden">
-                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="">
-            </div>
-        </div>
-        <div class="cursor-pointer mb-4">
             <div
                     class="bg-white h-12 w-12 flex items-center justify-center text-black text-2xl font-semibold rounded-xl mb-1 overflow-hidden">
                 <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="">
             </div>
         </div>
+        <!-- Room -->
         <div class="cursor-pointer mb-4">
-            <div
-                    class="bg-white h-12 w-12 flex items-center justify-center text-black text-2xl font-semibold rounded-3xl mb-1 overflow-hidden">
-                <img src="https://cdn.discordapp.com/embed/avatars/1.png" alt="">
-            </div>
+            <?php
+            $rooms = Room::getAll();
+            foreach ($rooms as $room) {
+                echo '<div class="bg-white h-12 w-12 flex items-center justify-center text-black text-2xl font-semibold rounded-3xl mb-1 overflow-hidden">';
+                echo '<p value="' . $room['room_id'] . '">' . $room['room_id'] . '</p>';
+               // echo '<img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="" data-value="' . $room['room_id'] . '">';
+                echo '</div>';
+            }
+            ?>
         </div>
-        <div class="cursor-pointer mb-4">
-            <div
-                    class="bg-white h-12 w-12 flex items-center justify-center text-black text-2xl font-semibold rounded-3xl mb-1 overflow-hidden">
-                <img src="https://cdn.discordapp.com/embed/avatars/2.png" alt="">
-            </div>
-        </div>
-        <div class="cursor-pointer mb-4">
-            <div
-                    class="bg-white h-12 w-12 flex items-center justify-center text-black text-2xl font-semibold rounded-3xl mb-1 overflow-hidden">
-                <img src="https://cdn.discordapp.com/embed/avatars/3.png" alt="">
-            </div>
-        </div>
-        <div class="cursor-pointer mb-4">
-            <div
-                    class="bg-white h-12 w-12 flex items-center justify-center text-black text-2xl font-semibold rounded-3xl mb-1 overflow-hidden">
-                <img src="https://cdn.discordapp.com/embed/avatars/4.png" alt="">
-            </div>
-        </div>
+
+
+
+
+
+
 
 
         <div id="addRoomTrigger" class="cursor-pointer mb-4" >
