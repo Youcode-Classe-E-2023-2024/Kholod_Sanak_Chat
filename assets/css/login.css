@@ -12,11 +12,11 @@
     background-color: #1f2029;
     overflow-x: hidden;
 }
-a.login{
+a.login1{
     cursor: pointer;
     transition: all 200ms linear;
 }
-a.login:hover {
+a.login1:hover {
     text-decoration: none;
 }
 .link {
@@ -25,7 +25,7 @@ a.login:hover {
 .link:hover {
     color: #ffeba7;
 }
-p.login {
+p.login1 {
     font-weight: 500;
     font-size: 14px;
     line-height: 1.7;
@@ -271,21 +271,4 @@ h6 span{
     background-color: #102770;
     color: #ffeba7;
     box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
-}
-
-
-
-
-.logo {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    display: block;
-    z-index: 100;
-    transition: all 250ms linear;
-}
-.logo img {
-    height: 26px;
-    width: auto;
-    display: block;
 }
