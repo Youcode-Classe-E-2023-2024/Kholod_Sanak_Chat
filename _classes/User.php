@@ -1,5 +1,4 @@
 <?php
-
 class User
 {
     public $id;
@@ -11,30 +10,75 @@ class User
     {
         global $db;
 
-        $result = $db->query("SELECT * FROM users WHERE users_id = '$id'");
+        $result = $db->query("SELECT * FROM user WHERE users_id = '$id'");
+
         $user = $result->fetch_assoc();
 
-        $this->id = $user['users_id'];
-        $this->email = $user['users_email'];
-        $this->username = $user['users_username'];
-        $this->password = $user['users_password'];
+        $this->id = $user['user_id'];
+        $this->email = $user['email'];
+        $this->username = $user['username'];
+        $this->password = $user['password'];
     }
 
-    static function getAll()
+    static function getAll($db)
     {
+        //global $db;
+        $result = $db->query("SELECT * FROM user");
+        if ($result)
+            return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    static function CheckUser($email, $db)
+    {
+        $sql = "SELECT * FROM user WHERE email = ?";
+
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        if ($result) {
+            return $result->fetch_assoc();
+        }
+
+        return false;
+    }
+
+    static function AddUser($email, $password,$username,  $picture, $db)
+    {
+        $sql = "INSERT INTO user (email, password, username, picture) VALUES (?, ?, ?, ?)";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param( "ssss",  $email, $password, $username, $picture);
+        $stmt->execute();
+        $stmt->close();
+
+    }
+
+    public function EditUser() {
         global $db;
-        $result = $db->query("SELECT * FROM users");
-        return $result->fetch_all(MYSQLI_ASSOC);
+
+        $stmt = $db->prepare("UPDATE user SET users_email = ?, users_username = ? WHERE users_id = ?");
+        $stmt->bind_param("ssi", $this->email, $this->username, $this->id);
+
+        $success = $stmt->execute();
+
+        $stmt->close();
+
+        return $success;
     }
 
-    function edit()
-    {
-        global $db;
-        return $db->query("UPDATE users SET users_email = '$this->email', users_username = '$this->username' WHERE users_id = '$this->id'");
-    }
-
-    public function setPassword($pwd)
-    {
+    public function setPassword($pwd) {
         $this->password = password_hash($pwd, PASSWORD_DEFAULT);
+    }
+    static function login ($user_id) {
+        $_SESSION["user_id"] = $user_id;
+        $_SESSION["login"] = true;
+        header('Location: ../index.php?page=home');
+    }
+
+    static function logout () {
+        session_destroy();
+        header('Location: ../index.php');
     }
 }
