@@ -117,5 +117,16 @@ class Room {
         }
     }
 
+    /**
+     * @return array|void
+     */
+    static function getAll()
+    {
+        global $db;
+        $result = $db->query("SELECT * FROM room");
+        if ($result)
+            return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 
 }
