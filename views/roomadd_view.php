@@ -63,6 +63,8 @@ $db = mysqli_connect('localhost', 'root', '', 'chat');
                 window.location.href = 'index.php?page=home';
             });
 
+            ////////////////           add room                 ///////////////
+
             $("#addRoom").click(function () {
                 console.log("clicked");
                 $.ajax({
