@@ -65,7 +65,7 @@
         </div>
         <div class="mb-8">
             <div class="px-4 mb-2 text-white flex justify-between items-center">
-                <div class="opacity-75 cursor-pointer">VOICE</div>
+                <div class="opacity-75 cursor-pointer">Members</div>
                 <div>
                     <svg class="fill-current h-5 w-5 opacity-50 cursor-pointer"
                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -76,7 +76,27 @@
             </div>
             <div
                     class="bg-teal-dark hover:bg-gray-800 cursor-pointer font-semibold py-1 px-4 text-gray-300">
-                ? General</div>
+                <?php
+                $users = User::getAll($db);
+                if (isset($_SESSION["user_id"])) {
+                    $creator = $_SESSION["user_id"];
+
+                    foreach ($users as $user) {
+                        if ($user['user_id'] == $creator) {
+                            continue; // Skip the creator from the list
+                        }
+                        echo '<div class="flex justify-between user-container">';
+                        echo '<img src="assets/img/' . $user['picture'] . '" alt="" class="w-12 rounded-l-2xl h-full object-cover">';
+                        echo '<p value="' . $user['user_id'] . '">' . $user['username'] . '</p>';
+                        echo '<button type="submit" class="add-friend-btn" data-user-id="' . $user['user_id'] . '">Add Friend</button>';
+                        echo '</div>';
+                        echo '<br>';
+                    }
+                }
+                ?>
+
+
+            </div>
         </div>
     </div>
     <!-- Bar end-->
@@ -101,11 +121,6 @@
             }
             ?>
         </div>
-
-
-
-
-
 
 
 
@@ -149,4 +164,29 @@
     });
 </script>
 
+
+<!-- send invitation -->
+<script>
+    $(document).ready(function () {
+        $('.add-friend-btn').on("click",function () {
+            //console.log($(this));
+            var userId = $(this).data('userId');
+            console.log(userId);
+
+            // Make an AJAX request to send a friend request
+            $.ajax({
+                type: 'POST',
+                url: 'controllers/home_controller.php',
+                data: { user_id: userId },
+                success: (data) =>{
+                console.log(data);
+
+                },
+                error: function (error) {
+                    alert('Failed to send invitation.');
+                }
+            });
+        });
+    });
+</script>
 
