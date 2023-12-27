@@ -1,0 +1,27 @@
+.menu {
+    display: none;
+    position: absolute;
+    background-color: #9ca3af;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1;
+}
+
+.menu.visible {
+    display: block;
+}
+
+.menu a {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: #333;
+}
+
+.menu a:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-button {
+    cursor: pointer;
+}

@@ -127,6 +127,27 @@ class Room {
         if ($result)
             return $result->fetch_all(MYSQLI_ASSOC);
     }
+    public static function getRoomCreated($userId)
+    {
+        global $db;
+
+        $query = "SELECT * FROM room WHERE creator = ?";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result) {
+            $rooms = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
+            return $rooms;
+        } else {
+
+            $stmt->close();
+            return false;
+        }
+    }
 
 
 }

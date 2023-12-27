@@ -18,7 +18,7 @@
         <div class="px-6 py-4 flex-1 overflow-y-scroll ">
             <!--Profil -->
             <!-- Modal -->
-            <div id="profileModal" style="display: none;">
+            <div id="profileModal" style="display: none; z-index: 1000;">
                 <div id="profileContent"></div>
                 <!--<button onclick="closeModal()">Close</button>-->
             </div>
@@ -90,7 +90,7 @@
 
                     foreach ($users as $user) {
                         if ($user['user_id'] == $creator) {
-                            continue; // Skip the creator from the list
+                            continue;
                         }
                         echo '<div class="flex justify-between user-container">';
                         echo '<img src="assets/img/' . $user['picture'] . '" alt="" class="w-12 rounded-l-2xl h-full object-cover">';
@@ -110,7 +110,7 @@
     <!-- side bar start -->
     <div class="bg-gray-900 text-purple-lighter flex-none w-24 p-6 hidden md:block">
         <!-- Profil -->
-        <div class="cursor-pointer mb-4 border-b border-gray-600 pb-2"  id="profileClick">
+        <div class="  cursor-pointer mb-4 border-b border-gray-600 pb-2"  id="profileClick">
             <div
                     class="bg-white h-12 w-12 flex items-center justify-center text-black text-2xl font-semibold rounded-xl mb-1 overflow-hidden">
                 <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="">
