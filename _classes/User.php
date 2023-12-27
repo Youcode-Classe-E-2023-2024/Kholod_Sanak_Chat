@@ -81,4 +81,25 @@ class User
         session_destroy();
         header('Location: ../index.php');
     }
+
+    /**
+     * @param $userId
+     * @return array|false|null
+     */
+    public static function getById($userId) {
+        global $db;
+
+        $stmt = $db->prepare("SELECT * FROM user WHERE user_id = ?");
+        $stmt->bind_param("i", $userId);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Fetch user data
+        $userData = $result->fetch_assoc();
+
+        $stmt->close();
+
+        return $userData;
+    }
 }
