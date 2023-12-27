@@ -140,27 +140,27 @@ if (file_exists('../_classes/Friend_request.php')) {
     menuButton.addEventListener('click', function() {
         menu.classList.toggle('visible');
     });
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log(menuButton)
-
-
-        // Add event listeners for each menu item
-        const deleteAccountButton = document.getElementById('deleteAccountButton');
-        const logoutButton = document.getElementById('logoutButton');
-        const viewFriendListButton = document.getElementById('viewFriendListButton');
-
-        deleteAccountButton.addEventListener('click', function() {
-            deleteAccount();
-        });
-
-        logoutButton.addEventListener('click', function() {
-            logout();
-        });
-
-        viewFriendListButton.addEventListener('click', function() {
-            viewFriendList();
-        });
-    });
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     console.log(menuButton)
+    //
+    //
+    //     // Add event listeners for each menu item
+    //     const deleteAccountButton = document.getElementById('deleteAccountButton');
+    //     const logoutButton = document.getElementById('logoutButton');
+    //     const viewFriendListButton = document.getElementById('viewFriendListButton');
+    //
+    //     deleteAccountButton.addEventListener('click', function() {
+    //         deleteAccount();
+    //     });
+    //
+    //     logoutButton.addEventListener('click', function() {
+    //         logout();
+    //     });
+    //
+    //     viewFriendListButton.addEventListener('click', function() {
+    //         viewFriendList();
+    //     });
+    // });
 
     function deleteAccount() {
         // Implement your logic for deleting the account

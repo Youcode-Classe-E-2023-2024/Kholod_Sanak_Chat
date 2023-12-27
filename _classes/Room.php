@@ -149,5 +149,103 @@ class Room {
         }
     }
 
+    ////////////////////////////            get message           /////////////////////////////////////////
+
+    /**
+     * @param $roomId
+     * @param $db
+     * @return false|mixed
+     */
+    public static function getMessagesForRoom($roomId, $db) {
+        // Prepare and execute a query to retrieve messages for the specified room
+        $query = "SELECT m.*, u.username, u.picture FROM message m
+                  JOIN user u ON m.user_id = u.user_id
+                  WHERE m.room_id = ? 
+                  ORDER BY m.date ASC";
+
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("i", $roomId);
+
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+
+            if ($result) {
+                $messages = $result->fetch_all(MYSQLI_ASSOC);
+                $stmt->close();
+
+                return $messages;
+            }
+        }
+
+        $stmt->close();
+        //return false;
+    }
+
+
+    /**
+     * @param $roomId
+     * @param $userId
+     * @param $messageContent
+     * @param $db
+     * @return mixed
+     */
+    public static function addMessage($roomId, $userId, $messageContent, $db) {
+        $query = "INSERT INTO message (message, room_id, user_id, date) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
+        $stmt = $db->prepare($query);
+
+        // Check if the prepare was successful
+        if ($stmt) {
+            $stmt->bind_param("sii", $messageContent, $roomId, $userId);
+
+            $success = $stmt->execute();
+
+            if ($success) {
+                $stmt->close();
+                return true;
+            } else {
+                echo "Error: " . $stmt->error;
+                $stmt->close();
+                return false;
+            }
+        } else {
+           echo "Error: " . $db->error;
+            return false;
+        }
+    }
+
+
+    /**
+     * @param $roomId
+     * @param $db
+     * @return array
+     */
+    public static function getMessages($roomId, $db) {
+        $messages = array();
+
+        // Prepare and execute a query to get messages for the specified room
+        $query = "SELECT message_id, message, user_id, date FROM message WHERE room_id = ? ORDER BY date DESC";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("i", $roomId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Fetch messages and store them in an array
+        while ($row = $result->fetch_assoc()) {
+            $messages[] = array(
+                'message_id' => $row['message_id'],
+                'message' => $row['message'],
+                'user_id' => $row['user_id'],
+                'date' => $row['date']
+            );
+        }
+
+        // Close the statement
+        $stmt->close();
+
+        return $messages;
+    }
+
+
+
 
 }

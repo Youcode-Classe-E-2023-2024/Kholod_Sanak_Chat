@@ -1,28 +1,33 @@
 <?php
+$db = mysqli_connect('localhost', 'root', '', 'chat');
+if (file_exists('../_classes/Friend_request.php')) {
+    include_once '../_classes/Friend_request.php';
+    include_once '../_classes/Room.php';
+    include_once '../_classes/User.php';
 
-// Include necessary files and classes
-// Include the Room class and any other required files
+    session_start();
+}
 
 // Check if room_id is set in the request
-if (isset($_GET['room_id'])) {
-    $roomId = $_GET['room_id'];
+if (isset($_GET['roomId'])) {
+    $roomId = $_GET['roomId'];
 
     // Assuming you have a function to get messages for a specific room
-    $messages = getMessagesForRoom($roomId);
+    $messages = Room::getMessagesForRoom($roomId, $db);
 
-    // Output the chat messages
+    // Output the chat messages as an array
+    $output = array();
     foreach ($messages as $message) {
-        echo '<div class="border-b border-gray-600 py-3 flex items-start mb-4 text-sm">';
-        echo '<img src="' . $message['user_avatar'] . '" class="cursor-pointer w-10 h-10 rounded-3xl mr-3">';
-        echo '<div class="flex-1 overflow-hidden">';
-        echo '<div>';
-        echo '<span class="font-bold text-red-300 cursor-pointer hover:underline">' . $message['username'] . '</span>';
-        echo '<span class="font-bold text-gray-400 text-xs">' . $message['timestamp'] . '</span>';
-        echo '</div>';
-        echo '<p class="text-white leading-normal">' . $message['message'] . '</p>';
-        echo '</div>';
-        echo '</div>';
+        $output[] = array(
+            'picture' => $message['picture'],
+            'username' => $message['username'],
+            'date' => $message['date'],
+            'message' => $message['message'],
+        );
     }
+
+    // Encode the array as JSON and output
+    echo json_encode($output);
 } else {
     // Handle the case where room_id is not set in the request
     echo 'Invalid request';
