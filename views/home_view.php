@@ -243,10 +243,15 @@
 
                 // Show the chat content
                 $('#chatContent').show();
+
+                // Scroll to the bottom of the chat content
+                var chatContent = document.getElementById('messagesContainer');
+                chatContent.scrollTop = chatContent.scrollHeight;
             },
             error: function(error) {
                 console.error('Ajax request failed:', error);
             }
+
         });
     }
 
