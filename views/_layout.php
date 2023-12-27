@@ -8,13 +8,14 @@
     <title><?= ucfirst($page) ?></title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Register /login  style link -->
-    <link rel="stylesheet" href="<?= PATH ?>assets/css/login.css">
-   <!-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">-->
+     <link rel="stylesheet" href="<?= PATH ?>assets/css/login.css">
 
     <!-- Profil style -->
-    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
-    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
-    <!-- Form css -->
+    <link rel="stylesheet" href="<?= PATH ?>assets/css/profile.css">
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 
 <body >
@@ -24,6 +25,6 @@
     </main>
 
     <footer></footer>
-    <script src="<?= PATH ?>assets/js/main.js"></script>
+    <script src="<?= PATH ?>assets/js/add_room.js"></script>
 </body>
 </html>
