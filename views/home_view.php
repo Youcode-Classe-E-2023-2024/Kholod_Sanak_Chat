@@ -37,8 +37,13 @@
             <!-- A message -->
 
         </div>
-
+        <!-- Chat input and submit button -->
+        <div class="flex items-center px-6 py-2 border-t border-gray-600">
+            <input type="text" id="messageInput" class="flex-1 px-4 py-2 mr-2 rounded-full border border-gray-500 focus:outline-none focus:border-blue-500" placeholder="Type your message...">
+            <button id="sendMessageBtn" class="bg-blue-500 px-4 py-2 rounded-full text-white">Send</button>
+        </div>
     </div>
+    
 
     <!-- bar start -->
     <div class="bg-gray-800 text-purple-lighter flex-none w-64 pb-6 hidden md:block">

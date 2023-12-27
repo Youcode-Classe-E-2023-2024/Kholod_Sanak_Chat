@@ -134,15 +134,15 @@ if (file_exists('../_classes/Friend_request.php')) {
 
 <!-- option profile -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuButton = document.getElementById('menuButton');
         const menu = document.getElementById('menu');
+    const menuButton = document.getElementById('menuButton');
+
+    menuButton.addEventListener('click', function() {
+        menu.classList.toggle('visible');
+    });
+    document.addEventListener('DOMContentLoaded', function() {
         console.log(menuButton)
 
-        menuButton.addEventListener('click', function() {
-            //console.log("clicked");
-            menu.classList.toggle('visible');
-        });
 
         // Add event listeners for each menu item
         const deleteAccountButton = document.getElementById('deleteAccountButton');
