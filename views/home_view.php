@@ -11,7 +11,7 @@
         <div class="border-b border-gray-600 flex px-6 py-2 items-center flex-none shadow-xl">
             <div class="flex flex-col">
                 <h3 id="roomTitle" class="text-white mb-1 font-bold text-xl text-gray-100">
-                    <span class="text-gray-400">#</span> Placeholder Room</h3>
+                    <span class="text-gray-400">#</span> Home</h3>
             </div>
         </div>
         <!-- Chat messages -->
@@ -174,6 +174,7 @@
 
        // Click event for the room items
        $('.room-item').on('click', function() {
+           //console.log($(this));
            var roomId = $(this).data('room-id');
            roomIdi = roomId;
            updateChatContent(roomId);
@@ -191,8 +192,7 @@
                $('#messageInput').val('');
            }
        });
-
-       //setInterval(handleUpdateChatContent, 1000);
+      // setInterval(handleUpdateChatContent, 1000);
    });
 
 
@@ -222,7 +222,7 @@
         $('#roomTitle').text('#' + roomId);
 
         // Assuming you have a PHP file to handle the server-side logic
-        var ajaxUrl = 'views/chat_view.php';
+        var ajaxUrl = 'controllers/displayChat_controller.php';
 
         // Make an Ajax request to get messages for the selected room
         $.ajax({
@@ -264,7 +264,7 @@
 
     function addMessage(roomId, messageContent) {
         // Assuming you have a PHP file to handle the server-side logic
-        var ajaxUrl = 'views/test_view.php';
+        var ajaxUrl = 'controllers/addChat_controller.php';
 
         // Make an Ajax request to add the message
         $.ajax({
@@ -318,7 +318,7 @@
             // Make an AJAX request to send a friend request
             $.ajax({
                 type: 'POST',
-                url: 'controllers/home_controller.php',
+                url: 'controllers/friendRequest_controller.php',
                 data: { user_id: userId },
                 success: (data) =>{
                 console.log(data);

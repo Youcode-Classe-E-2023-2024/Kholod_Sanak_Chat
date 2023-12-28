@@ -25,5 +25,7 @@ if(isset($_POST['decline']))
     $id_me = $_POST['myid'];
     $id_user = $_POST['friendid'];
     $request->deleteInvitation($id_me, $id_user);
+    header("Location: index.php?page=home");
+    exit();
 
 }
