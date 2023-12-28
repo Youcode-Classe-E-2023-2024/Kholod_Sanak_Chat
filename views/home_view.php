@@ -192,15 +192,17 @@
            }
        });
 
-       setInterval(handleUpdateChatContent, 1000);
+       //setInterval(handleUpdateChatContent, 1000);
    });
 
 
    // how to display
     function generateMessageHtml(message) {
+        const imagePath = `assets/img/${message.picture}`;
+
         return `
         <div class="border-b border-gray-600 py-3 flex items-start mb-4 text-sm">
-            <img src="${message.picture}" class="cursor-pointer w-10 h-10 rounded-3xl mr-3">
+            <img src="${imagePath}" class="cursor-pointer w-10 h-10 rounded-3xl mr-3">
             <div class="flex-1 overflow-hidden">
                 <div>
                     <span class="font-bold text-red-300 cursor-pointer hover:underline">${message.username}</span>
@@ -236,7 +238,6 @@
                 for (var i = 0; i < messages.length; i++) {
                     messageHtml += generateMessageHtml(messages[i]);
                 }
-
 
                 // Clear existing messages and append the new messages
                 $('#messagesContainer').html(messageHtml);
@@ -279,75 +280,9 @@
             }
         });
     }
-    
+
 </script>
 
-
-
-<!-- Display room content -->
-<!--<script>-->
-<!--    $(document).ready(function() {-->
-<!--        // Click event for the room items-->
-<!--        $('.room-item').on('click', function() {-->
-<!--            var roomId = $(this).data('room-id');-->
-<!---->
-<!--            // Update chat content based on the selected room-->
-<!--            updateChatContent(roomId);-->
-<!--        });-->
-<!--    });-->
-<!---->
-<!--    function updateChatContent(roomId) {-->
-<!--        // Set the room title-->
-<!--        $('#roomTitle').text('#' + roomId);-->
-<!---->
-<!--        // You can make an Ajax request here to fetch room-specific messages-->
-<!--        // For demonstration, I'm adding a placeholder message-->
-<!--        var messageHtml = '<div class="border-b border-gray-600 py-3 flex items-start mb-4 text-sm">' +-->
-<!--            '<img src="https://cdn.discordapp.com/embed/avatars/0.png" class="cursor-pointer w-10 h-10 rounded-3xl mr-3">' +-->
-<!--            '<div class="flex-1 overflow-hidden">' +-->
-<!--            '<div>' +-->
-<!--            '<span class="font-bold text-red-300 cursor-pointer hover:underline">User</span>' +-->
-<!--            '<span class="font-bold text-gray-400 text-xs">09:23</span>' +-->
-<!--            '</div>' +-->
-<!--            '<p class="text-white leading-normal">Placeholder message for room ' + roomId + '!</p>' +-->
-<!--            '</div>' +-->
-<!--            '</div>';-->
-<!---->
-<!--        // Clear existing messages and append the new message-->
-<!--        $('#messagesContainer').html(messageHtml);-->
-<!---->
-<!--        // Show the chat content-->
-<!--        $('#chatContent').show();-->
-<!--    }-->
-<!--</script>-->
-
-
-
-
-<!-- check if the room is clicked -->
-<!--<script>-->
-<!--    // jQuery Document Ready-->
-<!--    $(document).ready(function() {-->
-<!--        // Click event for the room items-->
-<!--        $('.room-item').on('click', function() {-->
-<!--            var roomId = $(this).data('room-id');-->
-<!---->
-<!--            // Ajax request-->
-<!--            $.ajax({-->
-<!--                type: 'POST',-->
-<!--                url: 'views/test1_view.php',-->
-<!--                data: { roomId: roomId },-->
-<!--                success: function(response) {-->
-<!--                    // Handle the Ajax response here-->
-<!--                    console.log(response);-->
-<!--                },-->
-<!--                error: function(error) {-->
-<!--                    console.error('Ajax request failed:', error);-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
 
 
 
