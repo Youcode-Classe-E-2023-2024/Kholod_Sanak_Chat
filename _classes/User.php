@@ -71,6 +71,7 @@ class User
     public function setPassword($pwd) {
         $this->password = password_hash($pwd, PASSWORD_DEFAULT);
     }
+
     static function login ($user_id) {
         $_SESSION["user_id"] = $user_id;
         $_SESSION["login"] = true;
@@ -79,7 +80,8 @@ class User
 
     static function logout () {
         session_destroy();
-        header('Location: ../index.php');
+        header("Location: index.php?page=login");
+        exit();
     }
 
     /**

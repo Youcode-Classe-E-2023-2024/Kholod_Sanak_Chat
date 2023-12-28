@@ -131,7 +131,9 @@
             </div>
         </div>
 
-
+        <form method="post" action="index.php?page=logout">
+            <button  type="submit" name="logout" class="cursor-pointer text-white text-lg">Logout</button>
+        </form>
     </div>
     <!-- Sidebar End-->
 </div>
@@ -278,128 +280,5 @@
 
 
 
-
-
-
-<!---->
-<!--<!-- Display form to add room -->-->
-<!--<script>-->
-<!--    // Wait for the document to be ready-->
-<!--    $(document).ready(function () {-->
-<!--        $("#addRoomTrigger").on("click", function () {-->
-<!--            $.ajax({-->
-<!--                url: 'views/roomadd_view.php',-->
-<!--                type: 'GET',-->
-<!--                success: function (data) {-->
-<!--                    $('.flex-1 .overflow-y-scroll').html(data);-->
-<!--                },-->
-<!--                error: function () {-->
-<!--                    alert('Failed to load content.');-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
-<!---->
-<!---->
-<!--<!-- send invitation -->-->
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--        $('.add-friend-btn').on("click",function () {-->
-<!--            //console.log($(this));-->
-<!--            var userId = $(this).data('userId');-->
-<!--            console.log(userId);-->
-<!---->
-<!--            // Make an AJAX request to send a friend request-->
-<!--            $.ajax({-->
-<!--                type: 'POST',-->
-<!--                url: 'controllers/friendRequest_controller.php',-->
-<!--                data: { user_id: userId },-->
-<!--                success: (data) =>{-->
-<!--                console.log(data);-->
-<!---->
-<!--                },-->
-<!--                error: function (error) {-->
-<!--                    alert('Failed to send invitation.');-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
-<!---->
-<!--<!-- profil -->-->
-<!--<script>-->
-<!--    document.getElementById('profileClick').addEventListener('click', function() {-->
-<!--        // Use AJAX to load content from profile_view.php-->
-<!--        $.ajax({-->
-<!--            url: 'views/profile_view.php',-->
-<!--            type: 'GET',-->
-<!--            success: function(data) {-->
-<!--                // Display the content in the modal-->
-<!--                $('#profileContent').html(data);-->
-<!--                $('#profileModal').show();-->
-<!--            },-->
-<!--            error: function() {-->
-<!--                alert('Error loading profile_view.php');-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
-<!---->
-<!---->
-<!--</script>-->
-<!---->
-<!--<!-- Display users -->-->
-<!--<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>-->
-<!--<script>-->
-<!--    $(document).ready(function() {-->
-<!--        // Use AJAX to load users dynamically-->
-<!--        $.ajax({-->
-<!--            url: 'controllers/allUsers_controller.php',-->
-<!--            type: 'GET',-->
-<!--            success: function(response) {-->
-<!--                $('#users-container').html(response);-->
-<!--            },-->
-<!--            error: function() {-->
-<!--                console.log('Error loading users.');-->
-<!--            }-->
-<!--        });-->
-<!--        // Add a click event for the "Add Friend" button-->
-<!--        $(document).on('click', '.add-friend-btn', function() {-->
-<!--            var userId = $(this).data('user-id');-->
-<!---->
-<!--        });-->
-<!--    });-->
-<!---->
-<!--</script>-->
-<!---->
-<!---->
-<!--<!-- Display room members -->-->
-<!--<script>-->
-<!--    function updateRoomMembers(roomId) {-->
-<!--        // Assuming you have a container for room members with id 'roomMembersContainer'-->
-<!--        var roomMembersContainer = $('#room_members');-->
-<!---->
-<!--        // Make an Ajax request to get room members for the selected room-->
-<!--        $.ajax({-->
-<!--            type: 'GET',-->
-<!--            url: 'controllers/roomMember_controller.php',-->
-<!--            data: { roomId: roomId },-->
-<!--            success: function (response) {-->
-<!--                // Update the room members container with the received HTML-->
-<!--                roomMembersContainer.html(response);-->
-<!--            },-->
-<!--            error: function (error) {-->
-<!--                console.error('Ajax request failed:', error);-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
-<!---->
-<!--</script>-->
-
-
-
-
-
-<!--<script src="<?= PATH ?>assets/js/add_room.js"></script>-->
 
 
