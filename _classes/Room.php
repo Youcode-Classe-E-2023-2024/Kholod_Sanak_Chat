@@ -117,6 +117,48 @@ class Room {
         }
     }
 
+
+    /**
+     * @param $roomId
+     * @param $db
+     * @return array
+     */
+    public static function getMembersForRoom($roomId, $db) {
+        $members = array();
+
+        // Prepare and execute a query to retrieve members for the specified room
+        $query = "SELECT user_id FROM room_member WHERE room_id = ?";
+        $stmt = $db->prepare($query);
+
+        if ($stmt) {
+            $stmt->bind_param("i", $roomId);
+
+            if ($stmt->execute()) {
+                $result = $stmt->get_result();
+
+                if ($result) {
+                    // Fetch each row and add it to the $members array
+                    while ($row = $result->fetch_assoc()) {
+                        $members[] = $row['user_id'];
+                    }
+
+                    $stmt->close();
+                }
+            } else {
+                // Handle execute error
+                echo "Error executing SQL statement: " . $stmt->error;
+            }
+        } else {
+            // Handle prepare error
+            echo "Error preparing SQL statement: " . $db->error;
+        }
+
+        return $members;
+    }
+
+
+
+
     /**
      * @return array|void
      */
@@ -127,6 +169,11 @@ class Room {
         if ($result)
             return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    /**
+     * @param $userId
+     * @return array|false
+     */
     public static function getRoomCreated($userId)
     {
         global $db;
@@ -213,37 +260,6 @@ class Room {
         }
     }
 
-
-    /**
-     * @param $roomId
-     * @param $db
-     * @return array
-     */
-    public static function getMessages($roomId, $db) {
-        $messages = array();
-
-        // Prepare and execute a query to get messages for the specified room
-        $query = "SELECT message_id, message, user_id, date FROM message WHERE room_id = ? ORDER BY date DESC";
-        $stmt = $db->prepare($query);
-        $stmt->bind_param("i", $roomId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        // Fetch messages and store them in an array
-        while ($row = $result->fetch_assoc()) {
-            $messages[] = array(
-                'message_id' => $row['message_id'],
-                'message' => $row['message'],
-                'user_id' => $row['user_id'],
-                'date' => $row['date']
-            );
-        }
-
-        // Close the statement
-        $stmt->close();
-
-        return $messages;
-    }
 
 
 

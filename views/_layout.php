@@ -25,6 +25,6 @@
     </main>
 
     <footer></footer>
-    <script src="<?= PATH ?>assets/js/add_room.js"></script>
+    <!--<script src="<?= PATH ?>assets/js/add_room.js"></script>-->
 </body>
 </html>

@@ -88,25 +88,27 @@
             </div>
             <div
                     class="bg-teal-dark hover:bg-gray-800 cursor-pointer font-semibold py-1 px-4 text-gray-300">
-                <?php
-                $users = User::getAll($db);
-                if (isset($_SESSION["user_id"])) {
-                    $creator = $_SESSION["user_id"];
+<!--                --><?php
+//                $users = User::getAll($db);
+//                if (isset($_SESSION["user_id"])) {
+//                    $creator = $_SESSION["user_id"];
+//
+//                    foreach ($users as $user) {
+//                        if ($user['user_id'] == $creator) {
+//                            continue;
+//                        }
+//                        echo '<div class="flex justify-between user-container">';
+//                        echo '<img src="assets/img/' . $user['picture'] . '" alt="" class="w-12 rounded-l-2xl h-full object-cover">';
+//                        echo '<p value="' . $user['user_id'] . '">' . $user['username'] . '</p>';
+//                        echo '<button type="submit" class="add-friend-btn" data-user-id="' . $user['user_id'] . '">Add Friend</button>';
+//                        echo '</div>';
+//                        echo '<br>';
+//                    }
+//                }
+//                ?>
 
-                    foreach ($users as $user) {
-                        if ($user['user_id'] == $creator) {
-                            continue;
-                        }
-                        echo '<div class="flex justify-between user-container">';
-                        echo '<img src="assets/img/' . $user['picture'] . '" alt="" class="w-12 rounded-l-2xl h-full object-cover">';
-                        echo '<p value="' . $user['user_id'] . '">' . $user['username'] . '</p>';
-                        echo '<button type="submit" class="add-friend-btn" data-user-id="' . $user['user_id'] . '">Add Friend</button>';
-                        echo '</div>';
-                        echo '<br>';
-                    }
-                }
-                ?>
-
+                <div id="users-container"></div>
+                <div id="room_members"></div>
 
             </div>
         </div>
@@ -156,13 +158,12 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<!-- Add message -->
+<!-- Add  & display messages -->
+
 
 <script>
    <!-- get room id-->
   let roomIdi = 0;
-
-
    $(document).ready(function() {
        function handleUpdateChatContent() {
            if ($.active === 0) {
@@ -171,7 +172,6 @@
                console.log('Previous AJAX request still active. Skipping update.');
            }
        }
-
        // Click event for the room items
        $('.room-item').on('click', function() {
            //console.log($(this));
@@ -213,10 +213,7 @@
         </div>
     `;
     }
-
-
-    // get messages
-
+    ////////////////          get messages
     function updateChatContent(roomId) {
         // Set the room title
         $('#roomTitle').text('#' + roomId);
@@ -255,8 +252,6 @@
 
         });
     }
-
-
     function getCurrentRoomId() {
         // Get the current room ID from the room title
         return $('#roomTitle').text().replace('#', '').trim();
@@ -352,5 +347,34 @@
 
 
 </script>
+
+<!-- Display users -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Use AJAX to load users dynamically
+        $.ajax({
+            url: 'controllers/allUsers_controller.php',
+            type: 'GET',
+            success: function(response) {
+                $('#users-container').html(response);
+            },
+            error: function() {
+                console.log('Error loading users.');
+            }
+        });
+        // Add a click event for the "Add Friend" button
+        $(document).on('click', '.add-friend-btn', function() {
+            var userId = $(this).data('user-id');
+
+        });
+    });
+</script>
+
+
+
+
+
+<!--<script src="<?= PATH ?>assets/js/add_room.js"></script>-->
 
 
