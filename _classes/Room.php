@@ -264,6 +264,28 @@ class Room {
     }
 
 
+    public static function banMember($room, $member)
+    {
+        global $db;
+
+        // Delete from room_member table
+        $deleteRoomMemberSql = "DELETE FROM room_member WHERE room_id=? AND user_id=?";
+        $deleteRoomMemberStmt = mysqli_stmt_init($db);
+        mysqli_stmt_prepare($deleteRoomMemberStmt, $deleteRoomMemberSql);
+        mysqli_stmt_bind_param($deleteRoomMemberStmt, 'ii', $room, $member);
+        mysqli_stmt_execute($deleteRoomMemberStmt);
+        mysqli_stmt_close($deleteRoomMemberStmt);
+
+        // Delete from message table
+        $deleteMessageSql = "DELETE FROM message WHERE user_id=? AND room_id=?";
+        $deleteMessageStmt = mysqli_stmt_init($db);
+        mysqli_stmt_prepare($deleteMessageStmt, $deleteMessageSql);
+        mysqli_stmt_bind_param($deleteMessageStmt, 'ii', $member, $room);
+        mysqli_stmt_execute($deleteMessageStmt);
+        mysqli_stmt_close($deleteMessageStmt);
+    }
+
+
 
 
 

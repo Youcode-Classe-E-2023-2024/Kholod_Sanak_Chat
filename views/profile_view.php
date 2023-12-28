@@ -33,7 +33,7 @@ if (file_exists('../_classes/Friend_request.php')) {
             <div id="menu" class="menu">
                 <ul>
                     <li id="deleteAccountButton"><a href="#">Delete Account</a></li>
-                    <li id="logoutButton"><a href="#">Logout</a></li>
+<!--                    <li id="logoutButton"><a href="#">Logout</a></li>-->
                     <li id="viewFriendListButton"><a href="#">View Friend List</a></li>
                 </ul>
             </div>
@@ -53,25 +53,26 @@ if (file_exists('../_classes/Friend_request.php')) {
 
             // Check if user data is retrieved successfully
             if ($user) {
-                echo '<div class="w-9/12 flex items-center justify-between">';
                 echo '<img src="assets/img/' . $user['picture'] . '" alt="" class="w-24 h-24 bg-blue-600 flex items-center rounded-full">';
-                echo ' <div class="w-8/12 flex flex-col leading-none pl-4">';
-                echo '<p class="text-2xl font-bold">' .  $user['username'] . '</p>';
-                echo '</div> </div>';
             } else {
                 echo 'Error fetching user data.';
             }
             ?>
 
         </div>
+        <div class="w-9/12 flex items-center">
+            <div class="w-10/12 flex flex-col leading-none pl-4">
+                <p class="text-2xl font-bold">username</p>
+                <!--<p class="text-sm pt-1 font-light text-gray-700">Network Engineer</p>-->
+            </div>
             <!-- Modify -->
-            <div class="w-4/12" >
+            <div class="w-2/12">
                 <button>
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-700" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.243 19H21v2H3v-4.243l9.9-9.9 4.242 4.244L9.242 19zm5.07-13.556l2.122-2.122a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414l-2.122 2.121-4.242-4.242z"/></svg>
 
                 </button>
             </div>
-
+        </div>
     </div>
     <!-- My rooms-->
     <div class="pt-12 px-4 w-full flex flex-col">
@@ -167,11 +168,6 @@ if (file_exists('../_classes/Friend_request.php')) {
         // Add your code here to handle the deletion of the account
     }
 
-    function logout() {
-        // Implement your logic for logging out
-        alert('Logging Out...');
-        // Add your code here to handle the logout
-    }
 
     function viewFriendList() {
         // Implement your logic for viewing the friend list
