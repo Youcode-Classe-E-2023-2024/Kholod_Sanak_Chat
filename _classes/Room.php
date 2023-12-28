@@ -127,7 +127,9 @@ class Room {
         $members = array();
 
         // Prepare and execute a query to retrieve members for the specified room
-        $query = "SELECT user_id FROM room_member WHERE room_id = ?";
+        $query = "SELECT user.* FROM room_member
+              JOIN user ON room_member.user_id = user.user_id
+              WHERE room_member.room_id = ?";
         $stmt = $db->prepare($query);
 
         if ($stmt) {
@@ -139,7 +141,7 @@ class Room {
                 if ($result) {
                     // Fetch each row and add it to the $members array
                     while ($row = $result->fetch_assoc()) {
-                        $members[] = $row['user_id'];
+                        $members[] = $row;
                     }
 
                     $stmt->close();
@@ -155,6 +157,7 @@ class Room {
 
         return $members;
     }
+
 
 
 

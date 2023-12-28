@@ -23,19 +23,6 @@
                 <button onclick="closeModal()"></button>
             </div>
 
-<!--             A message-->
-<!--            <div class="border-b border-gray-600 py-3 flex items-start mb-4 text-sm hidden">-->
-<!--                <img src="https://cdn.discordapp.com/embed/avatars/0.png" class="cursor-pointer w-10 h-10 rounded-3xl mr-3">-->
-<!--                <div class="flex-1 overflow-hidden">-->
-<!--                    <div>-->
-<!--                        <span class="font-bold text-red-300 cursor-pointer hover:underline">User</span>-->
-<!--                        <span class="font-bold text-gray-400 text-xs">09:23</span>-->
-<!--                    </div>-->
-<!--                    <p class="text-white leading-normal">my message!</p>-->
-<!--                </div>-->
-<!--            </div>-->
-            <!-- A message -->
-
         </div>
         <!-- Chat input and submit button -->
         <div class="flex items-center px-6 py-2 border-t border-gray-600">
@@ -43,8 +30,6 @@
             <button id="sendMessageBtn" class="bg-blue-500 px-4 py-2 rounded-full text-white">Send</button>
         </div>
     </div>
-
-
     <!-- bar start -->
     <div class="bg-gray-800 text-purple-lighter flex-none w-64 pb-6 hidden md:block">
         <div
@@ -88,28 +73,29 @@
             </div>
             <div
                     class="bg-teal-dark hover:bg-gray-800 cursor-pointer font-semibold py-1 px-4 text-gray-300">
-<!--                --><?php
-//                $users = User::getAll($db);
-//                if (isset($_SESSION["user_id"])) {
-//                    $creator = $_SESSION["user_id"];
-//
-//                    foreach ($users as $user) {
-//                        if ($user['user_id'] == $creator) {
-//                            continue;
-//                        }
-//                        echo '<div class="flex justify-between user-container">';
-//                        echo '<img src="assets/img/' . $user['picture'] . '" alt="" class="w-12 rounded-l-2xl h-full object-cover">';
-//                        echo '<p value="' . $user['user_id'] . '">' . $user['username'] . '</p>';
-//                        echo '<button type="submit" class="add-friend-btn" data-user-id="' . $user['user_id'] . '">Add Friend</button>';
-//                        echo '</div>';
-//                        echo '<br>';
-//                    }
-//                }
-//                ?>
 
-                <div id="users-container"></div>
+                <div class="user-container">
+                <?php
+                $users = User::getAll($db);
+                if (isset($_SESSION["user_id"])) {
+                    $creator = $_SESSION["user_id"];
+
+                    foreach ($users as $user) {
+                        if ($user['user_id'] == $creator) {
+                            continue;
+                        }
+                        echo '<div class="flex justify-between">';
+                        echo '<img src="assets/img/' . $user['picture'] . '" alt="" class="w-12 rounded-l-2xl h-full object-cover">';
+                        echo '<p value="' . $user['user_id'] . '">' . $user['username'] . '</p>';
+                        echo '<button type="submit" class="add-friend-btn" data-user-id="' . $user['user_id'] . '">Add Friend</button>';
+                        echo '</div>';
+                        echo '<br>';
+                    }
+                }
+                ?>
+
+                </div>
                 <div id="room_members"></div>
-
             </div>
         </div>
     </div>
@@ -173,11 +159,13 @@
            }
        }
        // Click event for the room items
-       $('.room-item').on('click', function() {
+       $('.room-item').off('click').on('click', function() {
            //console.log($(this));
            var roomId = $(this).data('room-id');
            roomIdi = roomId;
            updateChatContent(roomId);
+           updateRoomMembers(roomId);
+
        });
 
        // Click event for the send message button
@@ -278,98 +266,135 @@
 
 </script>
 
+<script src="<?= PATH ?>assets/js/add_room.js"></script>
+<script src="<?= PATH ?>assets/js/Add_friend.js"></script>
+<script src="<?= PATH ?>assets/js/display_addroom.js"></script>
+<script src="<?= PATH ?>assets/js/display_room_members.js"></script>
+<script src="<?= PATH ?>assets/js/display_users.js"></script>
+<script src="<?= PATH ?>assets/js/invit.js"></script>
+<script src="<?= PATH ?>assets/js/profile.js"></script>
 
 
 
 
-<!-- Display form to add room -->
-<script>
-    // Wait for the document to be ready
-    $(document).ready(function () {
-        $("#addRoomTrigger").on("click", function () {
-            $.ajax({
-                url: 'views/roomadd_view.php',
-                type: 'GET',
-                success: function (data) {
-                    $('.flex-1 .overflow-y-scroll').html(data);
-                },
-                error: function () {
-                    alert('Failed to load content.');
-                }
-            });
-        });
-    });
-</script>
 
 
-<!-- send invitation -->
-<script>
-    $(document).ready(function () {
-        $('.add-friend-btn').on("click",function () {
-            //console.log($(this));
-            var userId = $(this).data('userId');
-            console.log(userId);
-
-            // Make an AJAX request to send a friend request
-            $.ajax({
-                type: 'POST',
-                url: 'controllers/friendRequest_controller.php',
-                data: { user_id: userId },
-                success: (data) =>{
-                console.log(data);
-
-                },
-                error: function (error) {
-                    alert('Failed to send invitation.');
-                }
-            });
-        });
-    });
-</script>
-
-<!-- profil -->
-<script>
-    document.getElementById('profileClick').addEventListener('click', function() {
-        // Use AJAX to load content from profile_view.php
-        $.ajax({
-            url: 'views/profile_view.php',
-            type: 'GET',
-            success: function(data) {
-                // Display the content in the modal
-                $('#profileContent').html(data);
-                $('#profileModal').show();
-            },
-            error: function() {
-                alert('Error loading profile_view.php');
-            }
-        });
-    });
 
 
-</script>
-
-<!-- Display users -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Use AJAX to load users dynamically
-        $.ajax({
-            url: 'controllers/allUsers_controller.php',
-            type: 'GET',
-            success: function(response) {
-                $('#users-container').html(response);
-            },
-            error: function() {
-                console.log('Error loading users.');
-            }
-        });
-        // Add a click event for the "Add Friend" button
-        $(document).on('click', '.add-friend-btn', function() {
-            var userId = $(this).data('user-id');
-
-        });
-    });
-</script>
+<!---->
+<!--<!-- Display form to add room -->-->
+<!--<script>-->
+<!--    // Wait for the document to be ready-->
+<!--    $(document).ready(function () {-->
+<!--        $("#addRoomTrigger").on("click", function () {-->
+<!--            $.ajax({-->
+<!--                url: 'views/roomadd_view.php',-->
+<!--                type: 'GET',-->
+<!--                success: function (data) {-->
+<!--                    $('.flex-1 .overflow-y-scroll').html(data);-->
+<!--                },-->
+<!--                error: function () {-->
+<!--                    alert('Failed to load content.');-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!---->
+<!---->
+<!--<!-- send invitation -->-->
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        $('.add-friend-btn').on("click",function () {-->
+<!--            //console.log($(this));-->
+<!--            var userId = $(this).data('userId');-->
+<!--            console.log(userId);-->
+<!---->
+<!--            // Make an AJAX request to send a friend request-->
+<!--            $.ajax({-->
+<!--                type: 'POST',-->
+<!--                url: 'controllers/friendRequest_controller.php',-->
+<!--                data: { user_id: userId },-->
+<!--                success: (data) =>{-->
+<!--                console.log(data);-->
+<!---->
+<!--                },-->
+<!--                error: function (error) {-->
+<!--                    alert('Failed to send invitation.');-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!---->
+<!--<!-- profil -->-->
+<!--<script>-->
+<!--    document.getElementById('profileClick').addEventListener('click', function() {-->
+<!--        // Use AJAX to load content from profile_view.php-->
+<!--        $.ajax({-->
+<!--            url: 'views/profile_view.php',-->
+<!--            type: 'GET',-->
+<!--            success: function(data) {-->
+<!--                // Display the content in the modal-->
+<!--                $('#profileContent').html(data);-->
+<!--                $('#profileModal').show();-->
+<!--            },-->
+<!--            error: function() {-->
+<!--                alert('Error loading profile_view.php');-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+<!---->
+<!---->
+<!--</script>-->
+<!---->
+<!--<!-- Display users -->-->
+<!--<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>-->
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--        // Use AJAX to load users dynamically-->
+<!--        $.ajax({-->
+<!--            url: 'controllers/allUsers_controller.php',-->
+<!--            type: 'GET',-->
+<!--            success: function(response) {-->
+<!--                $('#users-container').html(response);-->
+<!--            },-->
+<!--            error: function() {-->
+<!--                console.log('Error loading users.');-->
+<!--            }-->
+<!--        });-->
+<!--        // Add a click event for the "Add Friend" button-->
+<!--        $(document).on('click', '.add-friend-btn', function() {-->
+<!--            var userId = $(this).data('user-id');-->
+<!---->
+<!--        });-->
+<!--    });-->
+<!---->
+<!--</script>-->
+<!---->
+<!---->
+<!--<!-- Display room members -->-->
+<!--<script>-->
+<!--    function updateRoomMembers(roomId) {-->
+<!--        // Assuming you have a container for room members with id 'roomMembersContainer'-->
+<!--        var roomMembersContainer = $('#room_members');-->
+<!---->
+<!--        // Make an Ajax request to get room members for the selected room-->
+<!--        $.ajax({-->
+<!--            type: 'GET',-->
+<!--            url: 'controllers/roomMember_controller.php',-->
+<!--            data: { roomId: roomId },-->
+<!--            success: function (response) {-->
+<!--                // Update the room members container with the received HTML-->
+<!--                roomMembersContainer.html(response);-->
+<!--            },-->
+<!--            error: function (error) {-->
+<!--                console.error('Ajax request failed:', error);-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+<!---->
+<!--</script>-->
 
 
 
